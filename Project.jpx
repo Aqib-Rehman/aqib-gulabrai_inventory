@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--JBuilder XML Project-->
+<project>
+  <property category="idl" name="ProcessIDL" value="false" />
+  <property category="runtime.0" name="RunnableType" value="com.borland.jbuilder.runtime.ApplicationRunner" />
+  <property category="runtime.0" name="application.class" value="project.Main" />
+  <property category="runtime.0" name="appserver.ejbJarsSaved" value="1" />
+  <property category="runtime.0" name="appserver.parameters" value="-jts -jns -jss -jdb" />
+  <property category="runtime.0" name="appserver.servername" value="ejbcontainer" />
+  <property category="runtime.0" name="appserver.vmparameters" value="" />
+  <property category="runtime.0" name="jsprunner.docbase" value="." />
+  <property category="runtime.0" name="jsprunner.jspfile" value="../../JBuilder4/bin" />
+  <property category="sys" name="AuthorLabel" value="@author" />
+  <property category="sys" name="BackupPath" value="bak" />
+  <property category="sys" name="BeansInstantiate" value="false" />
+  <property category="sys" name="BraceStyle" value="0" />
+  <property category="sys" name="CheckStable" value="1" />
+  <property category="sys" name="Company" value="Bell Labs, Soft Solutions [The End of Logic]" />
+  <property category="sys" name="CompanyLabel" value="Company:" />
+  <property category="sys" name="Copyright" value="Copyright (c) 2014" />
+  <property category="sys" name="CopyrightLabel" value="Copyright:" />
+  <property category="sys" name="DefaultPackage" value="project" />
+  <property category="sys" name="Description" value="The designed system solve all major problems of existing system." />
+  <property category="sys" name="DescriptionLabel" value="Description:" />
+  <property category="sys" name="DocPath" value="doc" />
+  <property category="sys" name="EventMatch" value="false" />
+  <property category="sys" name="EventStyle" value="1" />
+  <property category="sys" name="ExcludeClassEnabled" value="0" />
+  <property category="sys" name="InstanceVisibility" value="0" />
+  <property category="sys" name="JDK" value="java 1.3.0-C" />
+  <property category="sys" name="LastTag" value="0" />
+  <property category="sys" name="Libraries" value="" />
+  <property category="sys" name="MakeStable" value="0" />
+  <property category="sys" name="OutPath" value="classes" />
+  <property category="sys" name="SourcePath" value="src" />
+  <property category="sys" name="Title" value="Database for Industrial Management" />
+  <property category="sys" name="TitleLabel" value="Title:" />
+  <property category="sys" name="Version" value="2.0" />
+  <property category="sys" name="VersionLabel" value="@version" />
+  <property category="sys" name="WorkingDirectory" value="." />
+  <property category="sys" name="uidesign.size.project.AccountClosingFrame" value="1082,538" />
+  <property category="sys" name="uidesign.size.project.AccountPayableFrame" value="761,540" />
+  <property category="sys" name="uidesign.size.project.AccountPayableReceivableFrame" value="1258,747" />
+  <property category="sys" name="uidesign.size.project.AccountReceivableFrame" value="862,694" />
+  <property category="sys" name="uidesign.size.project.CashBookFrame" value="1445,688" />
+  <property category="sys" name="uidesign.size.project.CashRegisterFrame" value="1047,563" />
+  <property category="sys" name="uidesign.size.project.CreditDebitBookFrame" value="1309,646" />
+  <property category="sys" name="uidesign.size.project.CreditDebitFrame" value="887,582" />
+  <property category="sys" name="uidesign.size.project.CustomerFrame" value="1178,724" />
+  <property category="sys" name="uidesign.size.project.CustomerTransactionFrame" value="764,536" />
+  <property category="sys" name="uidesign.size.project.MainFrame" value="973,536" />
+  <property category="sys" name="uidesign.size.project.PageSetup" value="485,343" />
+  <property category="sys" name="uidesign.size.project.ProductFrame" value="1129,628" />
+  <property category="sys" name="uidesign.size.project.PurchaseBookFrame" value="1092,549" />
+  <property category="sys" name="uidesign.size.project.ReportFrame" value="1077,799" />
+  <property category="sys" name="uidesign.size.project.SaleBookFrame" value="1042,664" />
+  <property category="sys" name="uidesign.size.project.TransactionFrame" value="1170,610" />
+  <property category="sys" name="uidesign.size.project.VoucharFrame" value="1307,809" />
+  <node type="Archive" name="Application">
+    <property category="archiving" name="archiverClass" value="com.borland.jbuilder.wizard.archive.ApplicationArchiver" />
+    <property category="archiving" name="buildWithProject" value="0" />
+    <property category="archiving" name="targetPath" value="Project.jar" />
+  </node>
+  <node type="Archive" name="Application">
+    <property category="archiving" name="archiverClass" value="com.borland.jbuilder.wizard.archive.ApplicationArchiver" />
+    <property category="archiving" name="manifestMainClass" value="project.Main" />
+    <property category="archiving" name="targetPath" value="Project3.jar" />
+  </node>
+  <node type="Archive" name="Application">
+    <property category="archiving" name="archiverClass" value="com.borland.jbuilder.wizard.archive.ApplicationArchiver" />
+    <property category="archiving" name="manifestMainClass" value="project.Main" />
+    <property category="archiving" name="targetCompressed" value="1" />
+    <property category="archiving" name="targetPath" value="Project4.jar" />
+  </node>
+  <node type="Archive" name="Archive">
+    <property category="archiving" name="targetPath" value="Project2.jar" />
+  </node>
+  <file path="src/project/AccountClosingFrame.java" />
+  <file path="src/project/AccountPayableReceivableFrame.java" />
+  <file path="src/project/CamelCased.java" />
+  <file path="src/project/CashBookFrame.java" />
+  <file path="src/project/CashBookRecord.java" />
+  <file path="src/project/CashRegisterFrame.java" />
+  <file path="src/project/CashRegisterRecord.java" />
+  <file path="src/project/CreditDebitBookFrame.java" />
+  <file path="src/project/CustomerFrame.java" />
+  <file path="src/project/CustomerRecord.java" />
+  <file path="src/project/CustomerTransactionRecord.java" />
+  <file path="src/project/DatabaseManager.java" />
+  <file path="src/project/DataMarginInterface.java" />
+  <file path="src/project/DateFormat.java" />
+  <file path="src/project/Decode.java" />
+  <file path="src/project/Encode.java" />
+  <file path="src/project/ListItem.java" />
+  <file path="src/project/Main.java" />
+  <file path="src/project/MainFrame.java" />
+  <file path="src/project/MyKeySelectionManager.java" />
+  <file path="src/MyOwnFocusTraversalPolicy.java" />
+  <file path="src/project/NumberToWord.java" />
+  <file path="src/project/PageSetup.java" />
+  <file path="src/project/PageSetupInterface.java" />
+  <file path="src/project/ProductFrame.java" />
+  <file path="src/project/ProductRecord.java" />
+  <file path="src/project/ProductTransactionRecord.java" />
+  <file path="Project.html" />
+  <file path="src/project/PurchaseBookFrame.java" />
+  <file path="src/project/PurchaseSaleBookRecord.java" />
+  <file path="src/project/ReportCashDocument.java" />
+  <file path="src/project/ReportCashTodayTransactions.java" />
+  <file path="src/project/ReportCashTransactionDocument.java" />
+  <file path="src/project/ReportDispatchOrder.java" />
+  <file path="src/project/ReportFrame.java" />
+  <file path="src/project/ReportProductStockDocument.java" />
+  <file path="src/project/ReportReceipt.java" />
+  <file path="src/project/ReportReceiptBill.java" />
+  <file path="src/project/ReportVouchar.java" />
+  <file path="src/project/SaleBookFrame.java" />
+  <file path="src/project/SummaryDetailRecord.java" />
+  <file path="src/project/TableMap.java" />
+  <file path="src/project/TableSorter.java" />
+  <file path="src/project/TransactionBillRecord.java" />
+  <file path="src/project/TransactionDetailsRecord.java" />
+  <file path="src/project/TransactionFrame.java" />
+  <file path="src/project/TransactionRecord.java" />
+  <file path="src/project/WaitDialog.java" />
+</project>
+
