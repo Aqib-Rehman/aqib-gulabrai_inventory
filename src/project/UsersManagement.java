@@ -289,6 +289,7 @@ public class UsersManagement extends javax.swing.JFrame {
        
          try {
              java.util.Vector v=DatabaseManager.getProduct();
+             System.out.println("test2");
          } catch (Exception ex) {
              ex.printStackTrace();
          }

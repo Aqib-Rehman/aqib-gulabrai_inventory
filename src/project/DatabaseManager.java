@@ -34,6 +34,7 @@ public class DatabaseManager {
           File myObj = new File(dbconfig);
           FileInputStream fileInputStream = new FileInputStream(dbconfig);
           DataInputStream dataInputStream = new DataInputStream(fileInputStream);
+          System.out.println(myObj.getAbsolutePath());
           String data = dataInputStream.readLine();
           System.out.println(data);
           StringTokenizer tokenizer = new StringTokenizer(data, "=");
@@ -88,7 +89,7 @@ public class DatabaseManager {
 
 //        String dbpath = "D:\\Complete[2016-02-10]-Gulab Rai\\JBuilder-Project\\Project\\src\\Database.mdb" ;
 	    Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-	    String url="jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ="+"Database.mdb"+";DriverID=22;READONLY=true";
+	    String url="jdbc:odbc:Driver={Microsoft Access Driver (*.mdb)};DBQ="+dbpath+";DriverID=22;READONLY=true";
 
 	    con = DriverManager.getConnection(url);
 
