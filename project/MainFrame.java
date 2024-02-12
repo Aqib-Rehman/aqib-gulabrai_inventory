@@ -201,6 +201,8 @@ public class MainFrame extends JFrame implements ActionListener{
     this.show();
   }//end method
 
+  
+  
 public void actionPerformed(ActionEvent e){
   if(customerItem==e.getSource())  customerFrame.show();
   if(cashTransactionItem==e.getSource())transactionFrame.show();
@@ -211,11 +213,19 @@ public void actionPerformed(ActionEvent e){
   if(productItem==e.getSource())productFrame.show();
   if(purchaseBookItem==e.getSource())purchaseBookFrame.show();
   if(saleBookItem==e.getSource())saleBookFrame.show();
-  if(accountClosingItem==e.getSource())accountClosingFrame.show();
+//  if(accountClosingItem==e.getSource())accountClosingFrame.show();
   if(reportItem==e.getSource())reportFrame.show();
   if(accountPayableReceivableItem==e.getSource())accountPayableReceivableFrame.show();
   if(voucharItem==e.getSource())voucharFrame.setVisible(true);
 
   if(exitItem==e.getSource())System.exit(0);
  } //end method
+
+public void actionPerformed1(String e){
+  
+  if(e.equals("vf"))voucharFrame.setVisible(true);
+
+ 
+ } //end method
+
 }//end class
