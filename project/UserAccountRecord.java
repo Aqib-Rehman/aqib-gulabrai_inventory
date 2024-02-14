@@ -19,6 +19,6 @@ public class UserAccountRecord {
   
 
   public String toString(){
-    return name;
+    return username;
   }
 }

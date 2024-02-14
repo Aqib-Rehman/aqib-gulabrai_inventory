@@ -34,6 +34,7 @@ public class DatabaseManager {
           File myObj = new File(dbconfig);
           FileInputStream fileInputStream = new FileInputStream(dbconfig);
           DataInputStream dataInputStream = new DataInputStream(fileInputStream);
+          System.out.println(myObj.getAbsolutePath());
           String data = dataInputStream.readLine();
           System.out.println(data);
           StringTokenizer tokenizer = new StringTokenizer(data, "=");
@@ -47,7 +48,8 @@ public class DatabaseManager {
           FileOutputStream fos = new FileOutputStream(dbconfig);
           PrintWriter writer = new PrintWriter(fos);
 
-          writer.println("DBPATH=D:\\Complete[2016-02-10]-Gulab Rai\\JBuilder-Project\\Project\\src\\Database.mdb");
+//          writer.println("DBPATH=D:\\Complete[2016-02-10]-Gulab Rai\\JBuilder-Project\\Project\\src\\Database.mdb");
+          writer.println("DBPATH=Database.mdb");
           writer.close();
           fos.close();
 
@@ -297,6 +299,7 @@ public class DatabaseManager {
 
  /**********************************************/
   public static Vector getProduct()throws Exception{
+      System.out.println("test1*************");
         Statement st=null;
         ResultSet result=null;
    try{
@@ -1465,6 +1468,33 @@ public static void createUserAccountTable(){
          ex.printStackTrace();
     }
  }
+
+
+public static void addUserFramePermission(int idIs, String userName, String pass, String uType, String framesSelect){
+     String query = "";
+      
+     ResultSet result=null;
+     Statement st=null;
+     try {
+          st = con.createStatement();
+
+        query = "INSERT INTO useraccount (id, username, password , accounttype) values  ("+idIs+", '"+userName+"', '"+getHash(pass)+"', '"+Encode.userTypeEncode(uType)+"' ) ; " ;
+        System.out.println(query);
+        st.executeUpdate(query);
+
+      
+          query = "INSERT INTO userframepermission (useraccount_id, frame) values  ("+idIs+", '"+framesSelect+"' ) ; " ;
+       System.out.println(query);
+         st.executeUpdate(query);
+
+        
+ 
+
+     }catch (Exception ex){
+       
+         ex.printStackTrace();
+    }
+ }
  public static Vector getCashTransactionsFromSalePurchase(String date){
     String query = "SELECT * from purchase_sale_book psb , customer c WHERE psb.customer_id=c.customer_id AND psb.trans_date = #"+date+"# AND psb.terms_and_conditions = 'CASH'";
     System.out.println(query);
@@ -1499,6 +1529,35 @@ public static void createUserAccountTable(){
     }
 
     return v;
+ }// end of method
+ 
+ 
+ 
+  public static int getLastUserId(){
+    String query = "SELECT id from useraccount";
+    System.out.println(query);
+    Statement st=null;
+    ResultSet result=null;
+    int idIs=0;
+    try{
+       st=con.createStatement();
+       result=st.executeQuery(query);
+
+       while(result.next()){
+           idIs = result.getInt("id");
+         
+        }
+
+        if(st !=null)st.close();
+        return idIs;
+
+    }catch(Exception ex){
+      ex.printStackTrace();
+    }finally{
+      //if(con!=null)con.close();
+    }
+
+    return idIs;
  }// end of method
 
 }//end class

@@ -15,7 +15,7 @@ import project.DatabaseManager;
 	
 	public static void main(String args[]){
 		DatabaseManager.createUserAccountTable();
-		System.out.println(DatabaseManager.getHash("Helloo"));
+		System.out.println(DatabaseManager.getHash("Hello"));
 		
 	}
  

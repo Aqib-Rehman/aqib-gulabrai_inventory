@@ -2,6 +2,7 @@ package project;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -23,12 +24,12 @@ public class LoginFrame extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
-
+ 
         //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        setSize(new java.awt.Dimension(362, 154));
-        getContentPane().setLayout(null);
-
+//        setSize(new java.awt.Dimension(662, 554));
+         this.getContentPane().setLayout(null);
+ this.setResizable(false);
         jLabel1.setText("Username");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(46, 22, 48, 14);
@@ -102,6 +103,43 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }
     
+    
+        /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            throw ex;
+//         } catch (InstantiationException ex) {
+//        throw ex;
+//         } catch (IllegalAccessException ex) {
+//        throw ex;
+//         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//        throw ex;
+//         }
+        //</editor-fold>
+  
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+               LoginFrame lf = new LoginFrame();
+              
+               lf.setVisible(true);
+            }
+        });
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
