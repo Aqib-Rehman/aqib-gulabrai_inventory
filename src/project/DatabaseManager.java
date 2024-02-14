@@ -1435,7 +1435,7 @@ String query=" SELECT "+
  }//end methd
 
 public static void createUserAccountTable(){
-     String query = "CREATE TABLE useraccount ( id INT PRIMARY KEY,  username TEXT, password TEXT, accounttype TEXT );";
+     String query = "CREATE TABLE useraccount ( id INT PRIMARY KEY,  username TEXT CONSTRAINT Uniqueusername UNIQUE, password TEXT, accounttype TEXT );";
      System.out.println(query);
      ResultSet result=null;
      Statement st=null;
@@ -1468,6 +1468,9 @@ public static void createUserAccountTable(){
          ex.printStackTrace();
     }
  }
+
+
+
  public static Vector getCashTransactionsFromSalePurchase(String date){
     String query = "SELECT * from purchase_sale_book psb , customer c WHERE psb.customer_id=c.customer_id AND psb.trans_date = #"+date+"# AND psb.terms_and_conditions = 'CASH'";
     System.out.println(query);
@@ -1503,5 +1506,127 @@ public static void createUserAccountTable(){
 
     return v;
  }// end of method
+ 
+ 
+ 
+  public static int getLastUserId(){
+    String query = "SELECT MAX(id) from useraccount";
+    System.out.println(query);
+    Statement st=null;
+    ResultSet rs=null;
+    int idIs=0;
+    try{
+       st=con.createStatement();
+       rs=st.executeQuery(query);
+
+      if(rs.next()){
+          idIs = rs.getInt(1);
+        }
+
+        return idIs;
+
+    }catch(Exception ex){
+      ex.printStackTrace();
+    }finally{
+      //if(con!=null)con.close();
+    }
+
+    return idIs;
+ }// end of method
+  
+  
+  
+  
+  public static void addUserFramePermission(int idIs, String userName, String pass, String uType, String framesSelect){
+     String query = "";
+      
+     ResultSet result=null;
+     Statement st=null;
+     try {
+          st = con.createStatement();
+
+        query = "INSERT INTO useraccount (id, username, password , accounttype) values  ("+idIs+", '"+userName+"', '"+getHash(pass)+"', '"+Encode.userTypeEncode(uType)+"' ) ; " ;
+        System.out.println(query);
+        st.executeUpdate(query);
+
+      
+          query = "INSERT INTO userframepermission (useraccount_id, frame) values  ("+idIs+", '"+framesSelect+"' ) ; " ;
+       System.out.println(query);
+         st.executeUpdate(query);
+
+        
+ 
+
+     }catch (Exception ex){
+       
+         ex.printStackTrace();
+    }
+ }
+  
+  
+  
+  
+ public static Vector login(String userName, String pass, String uType) throws SQLException{
+    Statement st=null;
+        ResultSet result=null;
+   try{
+String query= " SELECT "+
+              " id  "+
+              " FROM useraccount "+
+              " WHERE username='"+userName+"' AND password='"+getHash(pass)+"' AND accounttype='"+Encode.userTypeEncode(uType)+"'";
+
+        System.out.println(query);
+        st=con.createStatement();
+        result=st.executeQuery(query);
+if(result.next()){
+        Vector v=new Vector();
+        
+        if(uType.equals("ADMIN")){
+            v.addElement("ALL,");
+        }
+        
+        else{
+           
+           int idIs =  result.getInt("id");
+             query= " SELECT "+
+              " *  "+
+              " FROM userframepermission "+
+ " WHERE useraccount_id="+idIs;
+
+        System.out.println(query);
+           Statement st2=null;
+        ResultSet result2=null;
+        
+        st2=con.createStatement();
+        result2=st2.executeQuery(query);
+        
+        while(result2.next()){
+          v.addElement(result2.getString("frame"));
+        }
+        
+        }
+
+      return v;
+}
+
+else{
+ //invalid user   
+    return null;
+    
+    
+}
+      
+      
+      
+   }  catch (SQLException ex) {
+          ex.printStackTrace();
+      }finally{
+     if(result!=null)result.close();
+     if(st!=null)st.close();
+   }
+      return null;
+ }//end methd
+  
+  
 
 }//end class

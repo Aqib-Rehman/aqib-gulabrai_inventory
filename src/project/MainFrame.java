@@ -2,6 +2,8 @@ package project;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.StringTokenizer;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -67,16 +69,16 @@ public class MainFrame extends JFrame implements ActionListener{
   private JLabel jLabel5 = new JLabel(new ImageIcon("5.jpg"));
   private JLabel jLabel6 = new JLabel(new ImageIcon("7.jpg"));
 
-  public MainFrame() {
+  public MainFrame(Vector v) {
    super("Gulab-Rai Mukhi Mengho Mal Commission Agent-Sinjhoro");
    try {
-      jbInit();
+      jbInit(v);
    }catch (Exception exception) {
       exception.printStackTrace();
    }
   }
 
-  private void jbInit() throws Exception {
+  private void jbInit(Vector v) throws Exception {
     getContentPane().setLayout(null);
 
     this.setJMenuBar(menuBar);
@@ -118,11 +120,28 @@ public class MainFrame extends JFrame implements ActionListener{
     jLabel5.setBounds(new Rectangle(770, 327, 230, 163));
     jLabel6.setText("");
     jLabel6.setBounds(new Rectangle(368, 279, 270, 200));
-    menuBar.add(customerMenu);
-    menuBar.add(productMenu);
-    menuBar.add(cashRegClosingAccMenu);
-    menuBar.add(reportMenu);
+    
+    
+    
+ int productMenuCount,cashRegClosingAccMenuCount,reportMenuCount;
+ productMenuCount=cashRegClosingAccMenuCount=reportMenuCount=0;
+     
+    
+String framesList  = v.get(0).toString();
+//framesList.ind
+StringTokenizer strTokens =
+                new StringTokenizer(framesList, ",");
 
+ while(strTokens.hasMoreTokens()) {
+ 
+            // print token one-by-one iteratively
+     
+     String myToken = strTokens.nextToken();
+            System.out.println(myToken);
+            
+            if(myToken.equals("ALL")){
+                
+                
     customerMenu.add(customerItem);
     customerMenu.add(cashTransactionItem);
     customerMenu.add(exitItem);
@@ -137,8 +156,96 @@ public class MainFrame extends JFrame implements ActionListener{
     cashRegClosingAccMenu.add(accountPayableReceivableItem);
     cashRegClosingAccMenu.add(cashRegisterItem);
     cashRegClosingAccMenu.add(accountClosingItem);
-
+    
     reportMenu.add(reportItem);
+                
+                
+    
+        
+    menuBar.add(customerMenu); 
+    menuBar.add(productMenu); 
+    menuBar.add(cashRegClosingAccMenu); 
+    menuBar.add(reportMenu);
+            }
+            
+            else{
+            if(myToken.equals("CUSTOMER")){
+                customerMenu.add(customerItem);
+            }
+            else if(myToken.equals("CASH TRANSACTION")){
+                customerMenu.add(cashTransactionItem);
+            }
+             else if(myToken.equals("PRODUCT")){
+                productMenu.add(productItem);
+                productMenuCount++;
+            }
+             else if(myToken.equals("PURCHASE BOOK")){
+                productMenu.add(purchaseBookItem);
+                productMenuCount++;
+            }
+             else if(myToken.equals("SALE BOOK")){
+                productMenu.add(saleBookItem);
+                productMenuCount++;
+            }
+             else if(myToken.equals("VOUCHER")){
+                productMenu.add(voucharItem);
+                productMenuCount++;
+            }
+             else if(myToken.equals("CASH BOOK")){
+                cashRegClosingAccMenu.add(cashBookItem);
+                cashRegClosingAccMenuCount++;
+            }
+             else if(myToken.equals("CR/DT BOOK")){
+                cashRegClosingAccMenu.add(creditDebitBookItem);
+                 cashRegClosingAccMenuCount++;
+            }
+             else if(myToken.equals("A/C PAY/REC")){
+                cashRegClosingAccMenu.add(accountPayableReceivableItem);
+                 cashRegClosingAccMenuCount++;
+            }
+             else if(myToken.equals("CASH REGISTER")){
+                cashRegClosingAccMenu.add(cashRegisterItem);
+                 cashRegClosingAccMenuCount++;
+            }
+             else if(myToken.equals("AC CLOSING")){
+                cashRegClosingAccMenu.add(accountClosingItem);
+                 cashRegClosingAccMenuCount++;
+            }
+             else if(myToken.equals("PRINTING REPORTS")){
+                reportMenu.add(reportItem);
+                reportMenuCount++;
+            }
+        }
+
+//    customerMenu.add(customerItem);
+//    customerMenu.add(cashTransactionItem);
+    customerMenu.add(exitItem);
+
+//    productMenu.add(productItem);
+//    productMenu.add(purchaseBookItem);
+//    productMenu.add(saleBookItem);
+//    productMenu.add(voucharItem);
+
+//    cashRegClosingAccMenu.add(cashBookItem);
+//    cashRegClosingAccMenu.add(creditDebitBookItem);
+//    cashRegClosingAccMenu.add(accountPayableReceivableItem);
+//    cashRegClosingAccMenu.add(cashRegisterItem);
+//    cashRegClosingAccMenu.add(accountClosingItem);
+    
+//    reportMenu.add(reportItem);
+    
+    
+    
+    menuBar.add(customerMenu);
+    if(productMenuCount!=0)
+    menuBar.add(productMenu);
+    if(cashRegClosingAccMenuCount!=0)
+    menuBar.add(cashRegClosingAccMenu);
+    if(reportMenuCount!=0)
+    menuBar.add(reportMenu);
+    
+  }
+    
 
     this.getContentPane().add(heading1Label1, null);
     this.getContentPane().add(heading3Label1, null);
@@ -201,6 +308,8 @@ public class MainFrame extends JFrame implements ActionListener{
     this.show();
   }//end method
 
+  
+  
 public void actionPerformed(ActionEvent e){
   if(customerItem==e.getSource())  customerFrame.show();
   if(cashTransactionItem==e.getSource())transactionFrame.show();
@@ -211,11 +320,19 @@ public void actionPerformed(ActionEvent e){
   if(productItem==e.getSource())productFrame.show();
   if(purchaseBookItem==e.getSource())purchaseBookFrame.show();
   if(saleBookItem==e.getSource())saleBookFrame.show();
-  if(accountClosingItem==e.getSource())accountClosingFrame.show();
+//  if(accountClosingItem==e.getSource())accountClosingFrame.show();
   if(reportItem==e.getSource())reportFrame.show();
   if(accountPayableReceivableItem==e.getSource())accountPayableReceivableFrame.show();
   if(voucharItem==e.getSource())voucharFrame.setVisible(true);
 
   if(exitItem==e.getSource())System.exit(0);
  } //end method
+
+public void actionPerformed1(Vector v){
+  
+//  if(e.equals("vf"))voucharFrame.setVisible(true);
+
+ 
+ } //end method
+
 }//end class

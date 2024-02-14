@@ -1,5 +1,8 @@
 package project;
 
+import java.awt.event.ActionEvent;
+import java.util.Vector;
+
 /**
  * Title:        Database for Industrial Management
  * Description:  The designed system solve all major problems of existing system.
@@ -10,7 +13,18 @@ package project;
 
 public class Main {
 
- public static void main(String arg[]){
-        new MainFrame().show();
+ public static void main(String args[]){
+     Vector v = null;
+    MainFrame mf =  new MainFrame(v);    
+        mf.show();
  }
+ 
+ 
+ public static void main1(Vector v){
+     
+    MainFrame mf =  new MainFrame(v);    
+        mf.show();
+ }
+ 
+ 
 }

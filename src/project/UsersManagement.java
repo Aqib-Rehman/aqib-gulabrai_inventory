@@ -28,12 +28,32 @@ public class UsersManagement extends javax.swing.JFrame {
      DefaultTableModel model1;
       FramesEntity fe;
      
+     
     public UsersManagement() {
         
         
         initComponents();
         
          fe = new FramesEntity();
+         
+         try {
+//             java.util.Vector v=
+                     DatabaseManager.createUserAccountTable();
+             System.out.println("test2");
+         } catch (Exception ex) {
+             ex.printStackTrace();
+         }
+         
+         try {
+//             java.util.Vector v=
+                   int idIs = DatabaseManager.getLastUserId();
+                         
+                   txt_id.setText(idIs+1+"");
+             System.out.println("test2");
+         } catch (Exception ex) {
+             ex.printStackTrace();
+         }
+         
 //        JCheckBox cb1 = new JCheckBox("CheckBox1 ");
 //                                    
 //                                    jpanel_checkboxes.add(cb1);
@@ -59,10 +79,10 @@ public class UsersManagement extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_id = new javax.swing.JTextField();
         txt_userName = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox();
+        combo_uType = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -94,8 +114,8 @@ public class UsersManagement extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        setDefaultCloseOperation(3);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -117,13 +137,13 @@ public class UsersManagement extends javax.swing.JFrame {
         jLabel5.setText("User Type");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 175, -1, -1));
 
-        jTextField1.setEnabled(false);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 57, 73, -1));
+        txt_id.setEnabled(false);
+        jPanel1.add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 57, 73, -1));
         jPanel1.add(txt_userName, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 95, 132, -1));
         jPanel1.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 134, 134, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADMIN", "USER" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 172, 107, -1));
+        combo_uType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADMIN", "OTHER" }));
+        jPanel1.add(combo_uType, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 172, 107, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 102)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -257,16 +277,20 @@ public class UsersManagement extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 28, -1, -1));
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, 576));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+      int idIs  =   Integer.parseInt(txt_id.getText().toString());
       String userName =   txt_userName.getText().toString();
 //      String password =   txt_password.toString();
      String password =  new String(txt_password.getPassword());
+     
+     String userType = String.valueOf(combo_uType.getSelectedItem());
+     String framesSelect="";
         DefaultListModel model = new DefaultListModel();
       model = (DefaultListModel) jlist_checkboxes.getModel();
       List frames = fe.getAllFrames();
@@ -276,10 +300,11 @@ public class UsersManagement extends javax.swing.JFrame {
 //                model.addElement(new CheckListItem(frames.get(i)));
 //           model.getElementAt(i);
            
-            CheckListItem item = (CheckListItem)
+            FrameRecord item = (FrameRecord)
                        model.getElementAt(i);
            if(item.isSelected()){
                String frameName = item.toString();
+               framesSelect = framesSelect+","+frameName;
            
             System.out.println("****"+frameName);
            }
@@ -288,7 +313,8 @@ public class UsersManagement extends javax.swing.JFrame {
        System.out.println("****"+password);
        
          try {
-             java.util.Vector v=DatabaseManager.getProduct();
+//             java.util.Vector v=
+                     DatabaseManager.addUserFramePermission(idIs, userName,password,userType, framesSelect);
              System.out.println("test2");
          } catch (Exception ex) {
              ex.printStackTrace();
@@ -350,7 +376,7 @@ jlist_checkboxes.setModel(model);
             for (int i = 0; i < frames.size(); i++) {
                 //ch[i]=new JCheckBox("CheckBox"+i);
 //                model.addElement(new CheckListItem("CheckBox"+i));
-                model.addElement(new CheckListItem(frames.get(i).toString()));
+                model.addElement(new FrameRecord(frames.get(i).toString()));
             }
             
             
@@ -361,7 +387,7 @@ jlist_checkboxes.setModel(model);
                     JList list = (JList) event.getSource();
                     // Get index of item clicked
                     int index = list.locationToIndex(event.getPoint());
-                    CheckListItem item = (CheckListItem)
+                    FrameRecord item = (FrameRecord)
                        list.getModel().getElementAt(index);
                     // Toggle selected state
                     item.setSelected(! item.isSelected());
@@ -486,6 +512,7 @@ jlist_checkboxes.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox combo_uType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -499,7 +526,6 @@ jlist_checkboxes.setModel(model);
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
@@ -521,9 +547,9 @@ jlist_checkboxes.setModel(model);
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JList jlist_checkboxes;
     private javax.swing.JPanel jpanel_checkboxes;
+    private javax.swing.JTextField txt_id;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_userName;
     // End of variables declaration//GEN-END:variables
