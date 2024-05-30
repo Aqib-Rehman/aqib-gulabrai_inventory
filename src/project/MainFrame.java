@@ -20,12 +20,14 @@ public class MainFrame extends JFrame implements ActionListener{
   private JMenuBar menuBar=new JMenuBar();
 
   private JMenu customerMenu=new JMenu("CUSTOMER");
+  private JMenu userMenu=new JMenu("USERS");
   private JMenu productMenu=new JMenu("PRODUCT");
   private JMenu cashRegClosingAccMenu=new JMenu("CASH REGISTER/ CLOSING ACCOUNT");
   private JMenu reportMenu=new JMenu("REPORTS");
 
 
   private JMenuItem  customerItem=new JMenuItem("CUSTOMER");
+  private JMenuItem  userManagementItem=new JMenuItem("USERS MANAGEMENT");
   private JMenuItem  cashTransactionItem=new JMenuItem("CASH TRANSACTION");
   private JMenuItem  exitItem=new JMenuItem("EXIT");
 
@@ -56,6 +58,7 @@ public class MainFrame extends JFrame implements ActionListener{
   private AccountPayableReceivableFrame accountPayableReceivableFrame=new AccountPayableReceivableFrame();
   //MODIFIED
   private VoucharFrame voucharFrame = new VoucharFrame();
+  private UsersManagement usersManagementFrame = new UsersManagement();
 
   private JLabel heading1Label = new JLabel();
   private JLabel heading2Label = new JLabel();
@@ -72,15 +75,32 @@ public class MainFrame extends JFrame implements ActionListener{
   public MainFrame(Vector v) {
    super("Gulab-Rai Mukhi Mengho Mal Commission Agent-Sinjhoro");
    try {
-      jbInit(v);
+       
+       UserAccountRecord uar = (UserAccountRecord) v.get(0);
+      jbInit(uar);
    }catch (Exception exception) {
       exception.printStackTrace();
    }
   }
 
-  private void jbInit(Vector v) throws Exception {
+  private void jbInit(UserAccountRecord uar) throws Exception {
     getContentPane().setLayout(null);
 
+    productFrame.setUser(uar);
+    saleBookFrame.setUser(uar);
+    cashRegisterFrame.setUser(uar);
+    cashBookFrame.setUser(uar);
+    creditDebitBookFrame.setUser(uar);
+    customerFrame.setUser(uar);
+    transactionFrame.setUser(uar);
+    purchaseBookFrame.setUser(uar);
+    accountClosingFrame.setUser(uar);
+    reportFrame.setUser(uar);
+    accountPayableReceivableFrame.setUser(uar);
+    voucharFrame.setUser(uar);
+    usersManagementFrame.setUser(uar);
+ 
+  
     this.setJMenuBar(menuBar);
     heading1Label.setFont(new java.awt.Font("Dialog", 1, 45));
     heading1Label.setText("Gulab-Rai Mukhi Mengho Mal");
@@ -127,7 +147,9 @@ public class MainFrame extends JFrame implements ActionListener{
  productMenuCount=cashRegClosingAccMenuCount=reportMenuCount=0;
      
     
-String framesList  = v.get(0).toString();
+String framesList  = uar.frames.toString();
+framesList = framesList.replace('[', ' ');
+framesList = framesList.replace(']', ' ');
 //framesList.ind
 StringTokenizer strTokens =
                 new StringTokenizer(framesList, ",");
@@ -136,12 +158,13 @@ StringTokenizer strTokens =
  
             // print token one-by-one iteratively
      
-     String myToken = strTokens.nextToken();
+     String myToken = strTokens.nextToken().trim();
             System.out.println(myToken);
             
             if(myToken.equals("ALL")){
                 
                 
+  
     customerMenu.add(customerItem);
     customerMenu.add(cashTransactionItem);
     customerMenu.add(exitItem);
@@ -158,6 +181,8 @@ StringTokenizer strTokens =
     cashRegClosingAccMenu.add(accountClosingItem);
     
     reportMenu.add(reportItem);
+    
+    userMenu.add(userManagementItem);
                 
                 
     
@@ -166,6 +191,7 @@ StringTokenizer strTokens =
     menuBar.add(productMenu); 
     menuBar.add(cashRegClosingAccMenu); 
     menuBar.add(reportMenu);
+    menuBar.add(userMenu);
             }
             
             else{
@@ -266,6 +292,7 @@ StringTokenizer strTokens =
     customerMenu.setBorder(border);
     cashRegClosingAccMenu.setBorder(border);
     productMenu.setBorder(border);
+    userMenu.setBorder(border);
 
     accountPayableReceivableItem.setBorder(border);
     customerItem.setBorder(border);
@@ -277,6 +304,7 @@ StringTokenizer strTokens =
     purchaseBookItem.setBorder(border);
     saleBookItem.setBorder(border);
     reportItem.setBorder(border);
+    userManagementItem.setBorder(border);
     //MODIFIED
     voucharItem.setBorder(border);
 
@@ -296,6 +324,7 @@ StringTokenizer strTokens =
     reportItem.addActionListener(this);
     accountPayableReceivableItem.addActionListener(this);
     voucharItem.addActionListener(this);
+    userManagementItem.addActionListener(this);
 
     Toolkit kit=this.getToolkit();
     Dimension d=kit.getScreenSize();
@@ -324,6 +353,7 @@ public void actionPerformed(ActionEvent e){
   if(reportItem==e.getSource())reportFrame.show();
   if(accountPayableReceivableItem==e.getSource())accountPayableReceivableFrame.show();
   if(voucharItem==e.getSource())voucharFrame.setVisible(true);
+  if(userManagementItem==e.getSource())usersManagementFrame.show();
 
   if(exitItem==e.getSource())System.exit(0);
  } //end method

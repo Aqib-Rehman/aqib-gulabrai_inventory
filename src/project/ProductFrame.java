@@ -47,11 +47,17 @@ public class ProductFrame extends JFrame  implements ActionListener,ListSelectio
   private JLabel valueLabel = new JLabel();
   private JLabel RsLabel = new JLabel();
   JButton printButton = new JButton(new ImageIcon("printer.jpg"));
+private UserAccountRecord uar;
+int frame_id;
 
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
   public ProductFrame() {
   super("PRODUCT STOCK");
     try {
       jbInit();
+      frame_id=1;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -303,7 +309,7 @@ valueTextField.setText("");
 
  private void getProduct(){
  try{
-   java.util.Vector v=DatabaseManager.getProduct();
+   java.util.Vector v=DatabaseManager.getProduct(uar);
    productList.setListData(v);
  }catch(Exception e){
   JOptionPane.showMessageDialog(this,"Database Driver check ODBC ["+e.getMessage()+"]");

@@ -89,9 +89,17 @@ public class VoucharFrame extends JFrame implements ActionListener,KeyListener{
   JLabel totalTermsConditionLabel = new JLabel();
   JButton transactionReportButton = new JButton();
   JTextField bearerTextField = new JTextField();
+  private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
+
   public VoucharFrame() {
     try {
       jbInit();
+      frame_id=12;
+      
       this.recieptRadioButton.setVisible(false);
       this.printSalePurchaseButton.setVisible(false);
 
@@ -662,7 +670,7 @@ public class VoucharFrame extends JFrame implements ActionListener,KeyListener{
         //removing all products from combobox
 
 
-        java.util.Vector v=DatabaseManager.getProduct();
+        java.util.Vector v=DatabaseManager.getProduct(uar);
         productComboBox.removeAllItems();
         //setting products in combobox
         for(int i=0;i<v.size();i++){
@@ -683,7 +691,7 @@ public class VoucharFrame extends JFrame implements ActionListener,KeyListener{
 
   private void getCustomers(){
     try{
-      java.util.Vector v=DatabaseManager.getCustomers();
+      java.util.Vector v=DatabaseManager.getCustomers(uar);
       customerComboBox.removeAllItems();
 
       for(int index=0; index<v.size(); index++){

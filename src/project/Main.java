@@ -14,7 +14,8 @@ import java.util.Vector;
 public class Main {
 
  public static void main(String args[]){
-     Vector v = null;
+   Vector v=new Vector();
+   v.addElement("ALL,");
     MainFrame mf =  new MainFrame(v);    
         mf.show();
  }

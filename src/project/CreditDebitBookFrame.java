@@ -44,11 +44,17 @@ public class CreditDebitBookFrame extends JFrame implements ActionListener{
   private JButton cashReportButton = new JButton(new ImageIcon("printer.jpg"));
   private JTextField toDateTextField = new JTextField();
   private JLabel toDateLabel = new JLabel();
+private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
 
   public CreditDebitBookFrame() {
   super("DEBIT/ CREDIT BOOK");
     try {
       jbInit();
+      frame_id=5;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -196,8 +202,8 @@ debitAmountTextField.setBorder(border);
    String dateFrom=this.currentDateTextField.getText().trim();
    String dateTo=this.toDateTextField.getText().trim();
 
-   creditObj=DatabaseManager.getPurchaseSaleBook(dateFrom,dateTo,'S',"CREDIT").toArray();
-   debitObj=DatabaseManager.getPurchaseSaleBook(dateFrom,dateTo,'P',"CREDIT").toArray();
+   creditObj=DatabaseManager.getPurchaseSaleBook(dateFrom,dateTo,'S',"CREDIT", uar).toArray();
+   debitObj=DatabaseManager.getPurchaseSaleBook(dateFrom,dateTo,'P',"CREDIT", uar).toArray();
 
    int creditAmount=getAmount(creditObj);
    int debitAmount=getAmount(debitObj);

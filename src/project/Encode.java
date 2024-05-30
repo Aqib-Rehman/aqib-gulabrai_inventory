@@ -35,6 +35,7 @@ public class Encode {
  public static String userTypeEncode(String userType){
   if(userType.equals("ADMIN")) userType="A";
   if(userType.equals("OTHER")) userType="O";
+  if(userType.equals("SUPAER_ADMIN")) userType="S";
   return userType;
  }//end method
 

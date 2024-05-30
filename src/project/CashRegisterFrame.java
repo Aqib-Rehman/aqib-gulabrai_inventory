@@ -42,11 +42,18 @@ public class CashRegisterFrame extends JFrame implements ActionListener,ListSele
   private JButton backButton = new JButton(new ImageIcon("back.jpg"));
   private JLabel dateOfOpeningLabel = new JLabel();
   private JLabel jLabel4 = new JLabel(new ImageIcon("4.jpg"));
+private UserAccountRecord uar;
+int frame_id;
+
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
 
   public CashRegisterFrame() {
   super("CASH REGISTER");
     try {
       jbInit();
+      frame_id=3;
     }
     catch(Exception e) {
       e.printStackTrace();

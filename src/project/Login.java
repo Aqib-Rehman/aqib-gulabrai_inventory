@@ -5,6 +5,8 @@
  */
 package project;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -35,6 +37,10 @@ public class Login extends javax.swing.JFrame {
         
         
         initComponents();
+        
+        Toolkit kit=this.getToolkit();
+    Dimension d=kit.getScreenSize();
+    this.setBounds(0,0,d.width,d.height);
         
          fe = new FramesEntity();
          
@@ -78,7 +84,7 @@ public class Login extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(3);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 204)));
@@ -114,7 +120,7 @@ public class Login extends javax.swing.JFrame {
         jButton2.setText("Close");
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 380, 330));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 520, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

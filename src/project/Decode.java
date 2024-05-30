@@ -53,6 +53,7 @@ public class Decode {
  public static String userTypeDecode(String user_type){
         if(user_type.equals("A")) user_type="ADMIN";
         if(user_type.equals("O")) user_type="OTHER";
+        if(user_type.equals("S")) user_type="SUPAER_ADMIN";
         return user_type;
   }
 

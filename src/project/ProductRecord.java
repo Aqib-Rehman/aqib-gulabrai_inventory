@@ -20,6 +20,8 @@ public class ProductRecord {
 
   public String remarks;
 
+  
+  
   public String toString() {
     return name;
   }

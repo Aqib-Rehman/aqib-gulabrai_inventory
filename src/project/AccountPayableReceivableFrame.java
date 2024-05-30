@@ -46,11 +46,17 @@ public class AccountPayableReceivableFrame extends JFrame implements ActionListe
   private JComboBox yearComboBox = new JComboBox();
   private JLabel yearLabel = new JLabel();
   JButton printButton = new JButton(new ImageIcon("printer.jpg"));
+private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
 
   public AccountPayableReceivableFrame() {
   super("ACCOUNT PAYABLE/ RECEIVABLE .......");
     try {
       jbInit();
+      frame_id=11;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -296,7 +302,7 @@ private void allCustomer(){
    String dateFrom="";
    String dateTo="";
 
-   java.util.Vector v=DatabaseManager.getCustomers();
+   java.util.Vector v=DatabaseManager.getCustomers(uar);
 
    java.util.Vector debitVector=new java.util.Vector();
    java.util.Vector creditVector=new java.util.Vector();

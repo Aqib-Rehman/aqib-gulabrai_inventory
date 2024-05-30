@@ -60,11 +60,17 @@ public class TransactionFrame extends JFrame implements ActionListener,ListSelec
   private JLabel customerBankLabel = new JLabel();
 //  JLabel jLabel4 = new JLabel(new ImageIcon("ntimage.gif"));
   JLabel jLabel5 = new JLabel(new ImageIcon("ntimage.gif"));
+private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
 
   public TransactionFrame() {
   super("CASH TRANSACTIONS");
     try {
       jbInit();
+      frame_id=7;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -401,7 +407,7 @@ public class TransactionFrame extends JFrame implements ActionListener,ListSelec
 
   private void getCustomers(){
  try{
-   java.util.Vector v=DatabaseManager.getCustomers();
+   java.util.Vector v=DatabaseManager.getCustomers(uar);
    customerComboBox.removeAllItems();
    customerBankComboBox.removeAllItems();
 

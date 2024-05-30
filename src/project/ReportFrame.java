@@ -62,10 +62,16 @@ public class ReportFrame extends JFrame implements ActionListener{
 
   private int pageNo;
   JButton indvProductIndvCustomerButton = new JButton(new ImageIcon("printer.jpg"));
-  public ReportFrame() {
+ private static UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
+public ReportFrame() {
   super("PRINTING REPORT..........");
     try {
       jbInit();
+      frame_id=10;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -555,7 +561,7 @@ private void cashReport(){
     pageNo=0;
     boolean isPrint=false;
 
-    java.util.Vector v=DatabaseManager.getCustomers();
+    java.util.Vector v=DatabaseManager.getCustomers(uar);
     for(int i=0; i<v.size(); i++){
       CustomerRecord customerRec=(CustomerRecord)v.elementAt(i);
       boolean b=getCustomerTransactions(book, customerRec,dateFrom,dateTo);
@@ -702,7 +708,7 @@ private void cashReport(){
     boolean isPrint=false;
 
     if(IS_PRODUCT_WISE){
-       v=DatabaseManager.getProduct();
+       v=DatabaseManager.getProduct(uar);
 
        for(int i=0; i<v.size(); i++){
          ProductRecord productRec=(ProductRecord)v.elementAt(i);
@@ -710,7 +716,7 @@ private void cashReport(){
          if(!isPrint)isPrint=b;
        }//end for loop
      }else{
-       v=DatabaseManager.getCustomers();
+       v=DatabaseManager.getCustomers(uar);
 
        for(int i=0; i<v.size(); i++){
          CustomerRecord customerRec=(CustomerRecord)v.elementAt(i);
@@ -926,7 +932,7 @@ private void indvProduct(boolean IS_PRODUCT_WISE,boolean isBoth){
 
   private void getProduct(){
   try{
-   java.util.Vector v=DatabaseManager.getProduct();
+   java.util.Vector v=DatabaseManager.getProduct(uar);
    productComboBox.removeAllItems();
 
    for(int index=0; index<v.size(); index++)
@@ -939,7 +945,7 @@ private void indvProduct(boolean IS_PRODUCT_WISE,boolean isBoth){
 
   private void getCustomers(){
  try{
-   java.util.Vector v=DatabaseManager.getCustomers();
+   java.util.Vector v=DatabaseManager.getCustomers(uar);
    customerComboBox.removeAllItems();
    customerProductComboBox.removeAllItems();
 
@@ -1036,7 +1042,7 @@ private void indvProduct(boolean IS_PRODUCT_WISE,boolean isBoth){
 
   public static void printProductStock(){
    try{
-      java.util.Vector v=DatabaseManager.getProduct();
+      java.util.Vector v=DatabaseManager.getProduct(uar);
 
       Book book=new Book();
 

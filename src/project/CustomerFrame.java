@@ -45,10 +45,17 @@ public class CustomerFrame extends JFrame implements ActionListener,ListSelectio
   private JComboBox customerTypeComboBox = new JComboBox();
   private JLabel customerTypeLabel = new JLabel();
 
+  private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
+
   public CustomerFrame() {
   super("CUSTOMER");
     try {
       jbInit();
+      frame_id=6;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -245,7 +252,7 @@ public class CustomerFrame extends JFrame implements ActionListener,ListSelectio
   }//end mthod
  private void getCustomers(){
  try{
-   java.util.Vector v=DatabaseManager.getCustomers();
+   java.util.Vector v=DatabaseManager.getCustomers(uar);
    customerList.setListData(v);
  }catch(Exception e){
   JOptionPane.showMessageDialog(this,"Database Driver check ODBC ["+e.getMessage()+"]");

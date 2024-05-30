@@ -48,12 +48,17 @@ public class CashBookFrame extends JFrame implements ActionListener{
   private   JButton cashReportButton = new JButton(new ImageIcon("printer.jpg"));
   JTextField toDateTextField = new JTextField();
   JLabel toDateLabel = new JLabel();
-
+private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
 
   public CashBookFrame() {
   super("CASH BOOK");
     try {
       jbInit();
+      frame_id=4;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -219,8 +224,8 @@ debitAmountTextField.setBorder(border);
    String current_date=this.currentDateTextField.getText().trim();
    String to_date=this.toDateTextField.getText().trim();
 
-   creditObj=DatabaseManager.getCashBook("C",current_date,to_date);
-   debitObj=DatabaseManager.getCashBook("D",current_date,to_date);
+   creditObj=DatabaseManager.getCashBook("C",current_date,to_date,uar);
+   debitObj=DatabaseManager.getCashBook("D",current_date,to_date,uar);
 
    int creditAmount=getAmount(creditObj);
    int debitAmount=getAmount(debitObj);

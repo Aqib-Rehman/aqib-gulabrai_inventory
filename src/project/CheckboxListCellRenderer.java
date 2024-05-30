@@ -30,4 +30,6 @@ public class CheckboxListCellRenderer extends JCheckBox implements ListCellRende
 
         return this;
     }
+    
+//    public void setL
 }

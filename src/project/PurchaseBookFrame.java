@@ -72,10 +72,16 @@ public class PurchaseBookFrame extends JFrame implements ActionListener,ListSele
   private JTextField valueTextField = new JTextField();
   private JLabel valueLabel = new JLabel();
 
+  private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
   public PurchaseBookFrame() {
   super("PURCHASE BOOK");
     try {
       jbInit();
+      frame_id=8;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -491,7 +497,7 @@ public class PurchaseBookFrame extends JFrame implements ActionListener,ListSele
 
   private void getProduct(){
   try{
-   java.util.Vector v=DatabaseManager.getProduct();
+   java.util.Vector v=DatabaseManager.getProduct(uar);
    productComboBox.removeAllItems();
 
    for(int index=0; index<v.size(); index++)
@@ -504,7 +510,7 @@ public class PurchaseBookFrame extends JFrame implements ActionListener,ListSele
 
   private void getCustomers(){
  try{
-   java.util.Vector v=DatabaseManager.getCustomers();
+   java.util.Vector v=DatabaseManager.getCustomers(uar);
    customerComboBox.removeAllItems();
 
    for(int index=0; index<v.size(); index++)

@@ -38,11 +38,17 @@ public class AccountClosingFrame extends JFrame implements ActionListener{
   private JLabel jLabel4 = new JLabel(new ImageIcon("4.jpg"));
   private JLabel jLabel5 = new JLabel(new ImageIcon("4.jpg"));
   private JLabel jLabel6 = new JLabel(new ImageIcon("4.jpg"));
+private UserAccountRecord uar;
+int frame_id;
+public void setUser(UserAccountRecord uar ){
+    this.uar = uar;
+}
 
   public AccountClosingFrame() {
   super("ACCOUNT CLOSING/ DUMPING SYSTEM");
     try {
       jbInit();
+      frame_id=9;
     }
     catch(Exception e) {
       e.printStackTrace();
@@ -195,7 +201,7 @@ public class AccountClosingFrame extends JFrame implements ActionListener{
 
   private void getCustomers(){
  try{
-   java.util.Vector v=DatabaseManager.getCustomers();
+   java.util.Vector v=DatabaseManager.getCustomers(uar);
    customerComboBox.removeAllItems();
 
    for(int index=0; index<v.size(); index++)
@@ -234,7 +240,7 @@ public class AccountClosingFrame extends JFrame implements ActionListener{
     }
 
  try{
-    java.util.Vector v=DatabaseManager.getCustomers();
+    java.util.Vector v=DatabaseManager.getCustomers(uar);
 
     waitDialog.setMaximunProcessValue(v.size());
     waitDialog.setMinimumProcessValue(1);
